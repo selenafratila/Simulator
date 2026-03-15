@@ -1,5 +1,5 @@
 import numpy as np
-
+import random
 class Antenna:
     def __init__(self, antenna_type: str, x: float, y: float, power_dbm: int):
         self.antenna_type = antenna_type
@@ -39,34 +39,62 @@ class User:
         
 
 
-#cream omul
-user_nou=User("Selena",100,100)  
-    
-# MacroCell: Antenă mare, acoperă kilometri (pusă în centrul orașului)
-macro = Antenna("MacroCell_Sector_A", x=0, y=0, power_dbm=46)
+users_list = []
+possible_names = ["Andrei", "Maria", "Matei", "Elena", "Alex", "Ioana", "Stefan", "Anca"]
 
+for i in range(10):
+    
+    name = random.choice(possible_names) + f"_{i}"
+    
+    x_rand = random.randint(-2000, 2000)
+    y_rand = random.randint(-2000, 2000)
+    
+    
+    users_list.append(User(name, x_rand, y_rand))
+
+
+print("\n" + "="*40)
+print("RAPORT SIMULARE MULTI-USER")
+print("="*40)
+
+
+# MacroCell: Antenă mare, acoperă kilometri (pusă în centrul orașului)
+#macro = Antenna("MacroCell_Sector_A", x=0, y=0, power_dbm=25)
+# mut macrocell la periferie ca userii sa aiba si alte antene de l acare sa prinda semnal
+macro = Antenna("MacroCell_Sector_A", x=1500, y=1500, power_dbm=25)
 # MicroCell: Acoperă o stradă sau o intersecție aglomerată
-micro = Antenna("MicroCell_CityCenter", x=300, y=100, power_dbm=33)
+micro = Antenna("MicroCell_CityCenter", x=300, y=100, power_dbm=15)
 
 # PicoCell: Acoperă interiorul unei clădiri (mall/universitate)
-pico = Antenna("PicoCell_ETTI_Hall", x=50, y=50, power_dbm=20)
+pico = Antenna("PicoCell_ETTI_Hall", x=50, y=50, power_dbm=5)
 
 antennas_list=[macro,micro,pico]
 
-d=user_nou.calculate_distance_to_antenna(macro) 
-print(f"Distanta calculata este: {d:.2f} metri")
+excellent_count = 0
+good_count = 0
+poor_count = 0
+dead_zone_count = 0
 
-# Calculăm semnalul de la antene pana la user_nou
+for u in users_list:
+   
+    best_ant, best_sig = u.find_best_antenna(antennas_list)
 
-s_macro = user_nou.get_signal_from_antenna(macro)
-s_micro = user_nou.get_signal_from_antenna(micro)
-s_pico= user_nou.get_signal_from_antenna(pico)
+    if best_sig > -70:
+        excellent_count += 1
+    elif -85 < best_sig <= -70:
+        good_count += 1
+    elif -100 < best_sig <= -85:
+        poor_count += 1
+    else:
+        dead_zone_count += 1
+    #cati utilizatori au semnal excelent, bun etc 
 
-print(f"--- ANALIZĂ CONECTIVITATE ---")
-print(f"Semnal de la {macro.antenna_type} (Macro): {s_macro:.2f} dBm")
-print(f"Semnal de la {micro.antenna_type} (Macro): {s_micro:.2f} dBm")
-print(f"Semnal de la {pico.antenna_type} (Pico): {s_pico:.2f} dBm")
+    print(f"-> {u.name:10} | Poz: ({u.x:4}, {u.y:4}) | Antena: {best_ant:20} | Semnal: {best_sig:.2f} dBm")
 
-name_best_antenna_for_user, best_power =user_nou.find_best_antenna(antennas_list)
+print("="*40)
 
-print(f"Cea mai bună opțiune pentru {user_nou.name} este {name_best_antenna_for_user} cu {best_power:.2f} dBm")
+print("\n--- FINAL NETWORK STATISTICS ---")
+print(f"Excellent coverage: {excellent_count}")
+print(f"Good coverage:      {good_count}")
+print(f"Poor coverage:      {poor_count}")
+print(f"Dead zones:         {dead_zone_count}")

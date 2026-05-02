@@ -1,5 +1,7 @@
 import numpy as np
 import random
+import matplotlib.pyplot as plt
+import matplotlib.patches as patches
 
 # --- CONFIGURATION CONSTANTS ---
 MAP_LIMIT = 2500
@@ -87,6 +89,72 @@ def classify_antenna(power):
         return "MicroCell"
     else:
         return "MacroCell"
+
+def visualize_city(users, antennas, obstacles):
+    fig, ax = plt.subplots(figsize=(12, 12))
+    
+    # Colors
+    obs_colors = {
+        "Concrete Block": "gray",
+        "Brick Building": "peru",
+        "Forest": "forestgreen",
+        "Glass Office": "skyblue",
+        "Metal Warehouse": "dimgray"
+    }
+
+    # Drawing obstacles
+    for obs in obstacles:
+        width = obs.x2 - obs.x1
+        height = obs.y2 - obs.y1
+        rect = patches.Rectangle((obs.x1, obs.y1), width, height, 
+                                 linewidth=1, edgecolor='black', 
+                                 facecolor=obs_colors.get(obs.obs_type, "silver"), 
+                                 alpha=0.6, label="Obstacle")
+        ax.add_patch(rect)
+        plt.text(obs.x1, obs.y2 + 20, obs.name, fontsize=8, fontweight='bold')
+
+    # Drawing users
+    for u in users:
+        _, sig = u.find_best_antenna(antennas, obstacles)
+        
+        # Color based on the performance
+        if sig > -70: color = 'green'      # Excelent
+        elif -85 < sig <= -70: color = 'gold'  # Bun
+        elif -100 < sig <= -85: color = 'orange' # Slab
+        else: color = 'red'               # Dead Zone
+        
+        plt.scatter(u.x, u.y, c=color, s=40, edgecolors='black', zorder=5)
+
+    # Drawing antennas
+    for ant in antennas:
+        plt.scatter(ant.x, ant.y, marker='^', c='blue', s=150, 
+                    edgecolors='white', linewidth=2, zorder=10)
+        plt.text(ant.x, ant.y - 150, ant.antenna_type, fontsize=10, 
+                 ha='center', color='blue', fontweight='bold', 
+                 bbox=dict(facecolor='white', alpha=0.7, edgecolor='none'))
+
+    # Design configuration
+    plt.xlim(-MAP_LIMIT - 100, MAP_LIMIT + 100)
+    plt.ylim(-MAP_LIMIT - 100, MAP_LIMIT + 100)
+    plt.axhline(0, color='black', linewidth=0.5, ls='--')
+    plt.axvline(0, color='black', linewidth=0.5, ls='--')
+    plt.grid(True, linestyle=':', alpha=0.5)
+    plt.title("Smart City Network Coverage Map", fontsize=15)
+    plt.xlabel("X distance (meters)")
+    plt.ylabel("Y distance (meters)")
+    
+    # Custom legend
+    from matplotlib.lines import Line2D
+    legend_elements = [
+        Line2D([0], [0], marker='^', color='w', markerfacecolor='blue', markersize=10, label='Antenna'),
+        Line2D([0], [0], marker='o', color='w', markerfacecolor='green', label='Excellent'),
+        Line2D([0], [0], marker='o', color='w', markerfacecolor='gold', label='Good'),
+        Line2D([0], [0], marker='o', color='w', markerfacecolor='orange', label='Poor'),
+        Line2D([0], [0], marker='o', color='w', markerfacecolor='red', label='Dead Zone')
+    ]
+    ax.legend(handles=legend_elements, loc='upper right')
+    
+    plt.show()
 
 # --- DATA GENERATION ---
 first_names = ["Maria", "Andrei", "Elena", "Matei", "Ioana", "Stefan", "Anca", "Alex", "Cristian", "Laura"]
@@ -179,3 +247,5 @@ for u in users_list:
 print("="*70)
 print(f"FINAL STATISTICS: Exc: {excellent_count} | Good: {good_count} | Poor: {poor_count} | Dead: {dead_zone_count}")
 print("="*70)
+
+visualize_city(users_list, antennas_list, obstacles_list)

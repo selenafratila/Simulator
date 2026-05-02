@@ -30,7 +30,7 @@ Material Physics: Metal correctly triggers the highest attenuation, creating a v
 
 <img width="870" height="350" alt="Screen Shot 2026-04-13 at 04 00 28" src="https://github.com/user-attachments/assets/c7c875c9-7b7f-42d5-a875-60463e2782ad" />
 
-<img width="1000" height="1000" alt="download1" src="https://github.com/user-attachments/assets/a876fbb7-eed1-4c48-85f2-85f4fe377fe1" />
+<img width="870" height="870" alt="download1" src="https://github.com/user-attachments/assets/a876fbb7-eed1-4c48-85f2-85f4fe377fe1" />
 
 -**The Urban Jungle:** Mixed obstacles (Forest & Concrete) demonstrating how small cells solve local coverage gaps.
 
@@ -46,7 +46,7 @@ Network Hybridity: Demonstrates a realistic hybrid network where a Macro antenna
 
 <img width="870" height="350" alt="Screen Shot 2026-04-13 at 04 15 24" src="https://github.com/user-attachments/assets/bd0052b8-2d8b-454a-be16-d1bcc3118746" />
 
-<img width="1000" height="1000" alt="download2" src="https://github.com/user-attachments/assets/5b808601-71cf-4b7a-856f-5bbc0ebcc924" />
+<img width="870" height="870" alt="download2" src="https://github.com/user-attachments/assets/5b808601-71cf-4b7a-856f-5bbc0ebcc924" />
 
 -**The Glass District:** A mix of glass towers and a massive concrete barrier.
 
@@ -58,11 +58,11 @@ Smart Handover: Louie Scavo is the only one switching to PicoCell_1 because the 
 
 Logic: Shows the model's ability to differentiate between material types and handle localized coverage gaps.
 
-<img width="870" height="350" alt="Screen Shot 2026-04-13 at 04 44 56" src="https://github.com/user-attachments/assets/f4040040-c5cc-4ad9-a16e-d9626c44ddd6" />
+<img width="870" height="550" alt="Screen Shot 2026-04-13 at 04 44 56" src="https://github.com/user-attachments/assets/f4040040-c5cc-4ad9-a16e-d9626c44ddd6" />
 
-<img width="870" height="350" alt="Screen Shot 2026-04-13 at 04 45 13" src="https://github.com/user-attachments/assets/d714a3d7-b2d7-4283-838b-1fb8e8e31e8e" />
+<img width="870" height="550" alt="Screen Shot 2026-04-13 at 04 45 13" src="https://github.com/user-attachments/assets/d714a3d7-b2d7-4283-838b-1fb8e8e31e8e" />
 
-<img width="1000" height="1000" alt="download4" src="https://github.com/user-attachments/assets/08bd3a1e-7040-453c-be5d-960c97042c5f" />
+<img width="870" height="870" alt="download4" src="https://github.com/user-attachments/assets/08bd3a1e-7040-453c-be5d-960c97042c5f" />
 
 
 ## Software Architecture (OOP)

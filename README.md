@@ -42,7 +42,7 @@ Forest Attenuation: The "Central Park" area significantly weakens the main signa
 
 Network Hybridity: Demonstrates a realistic hybrid network where a Macro antenna covers the wide area while a PicoCell handles "shadowed" pockets.
 
-<img width="870" height="450" alt="Screen Shot 2026-04-13 at 04 15 14" src="https://github.com/user-attachments/assets/1618bf06-129c-4af7-b11b-71378a7dce53" />
+<img width="870" height="550" alt="Screen Shot 2026-04-13 at 04 15 14" src="https://github.com/user-attachments/assets/1618bf06-129c-4af7-b11b-71378a7dce53" />
 
 <img width="870" height="450" alt="Screen Shot 2026-04-13 at 04 15 24" src="https://github.com/user-attachments/assets/bd0052b8-2d8b-454a-be16-d1bcc3118746" />
 
@@ -60,7 +60,7 @@ Logic: Shows the model's ability to differentiate between material types and han
 
 <img width="870" height="650" alt="Screen Shot 2026-04-13 at 04 44 56" src="https://github.com/user-attachments/assets/f4040040-c5cc-4ad9-a16e-d9626c44ddd6" />
 
-<img width="870" height="650" alt="Screen Shot 2026-04-13 at 04 45 13" src="https://github.com/user-attachments/assets/d714a3d7-b2d7-4283-838b-1fb8e8e31e8e" />
+<img width="870" height="550" alt="Screen Shot 2026-04-13 at 04 45 13" src="https://github.com/user-attachments/assets/d714a3d7-b2d7-4283-838b-1fb8e8e31e8e" />
 
 <img width="870" height="870" alt="download4" src="https://github.com/user-attachments/assets/08bd3a1e-7040-453c-be5d-960c97042c5f" />
 

@@ -105,12 +105,31 @@ while len(users_list) < num_users:
         users_list.append(User(full_name, x, y))
 
 # --- CITY OBSTACLES ---
-obstacles_list = [
-    Obstacle("Shopping Mall", 0, 0, 400, 400, "Glass Office"),
-    Obstacle("Industrial Area", -1500, -1500, -1000, -1000, "Metal Warehouse"),
-    Obstacle("Residential Block", 500, -500, 800, -200, "Concrete Block")
-]
-
+obstacles_list = []
+print("\n--- CITY OBSTACLES CONFIGURATION ---")
+while True:
+    response = input("Add an obstacle/building? (yes/no): ").lower()
+    if response != 'yes': break
+    
+    print(f"Available types: {list(OBSTACLE_TYPES.keys())}")
+    obs_name = input("Name of the building: ")
+    obs_type = input("Type (from list above): ")
+    
+    try:
+        ox1 = float(input("Left-Down X: "))
+        oy1 = float(input("Left-Down Y: "))
+        ox2 = float(input("Right-Up X: "))
+        oy2 = float(input("Right-Up Y: "))
+        
+        #x2 must be >= x1, y2>=y1
+        if ox2 <= ox1 or oy2 <= oy1:
+            print("Error: Right-Up coordinates must be greater than Left-Down!")
+            continue
+            
+        obstacles_list.append(Obstacle(obs_name, ox1, oy1, ox2, oy2, obs_type))
+        print(f"Added {obs_name} ({obs_type}) to the map.")
+    except ValueError:
+        print("Invalid input! Use numbers.")
 # --- ANTENNA CONFIGURATION (VERSION B with Min/Max) ---
 antennas_list = [Antenna("Macro_Default", 1500, 1500, 45)]
 

@@ -115,16 +115,27 @@ def visualize_city(users, antennas, obstacles):
 
     # Drawing users
     for u in users:
-        _, sig = u.find_best_antenna(antennas, obstacles)
+        ant_name, sig = u.find_best_antenna(antennas, obstacles)
+      
+        best_ant = next(a for a in antennas if a.antenna_type == ant_name)
         
-        # Color based on the performance
-        if sig > -70: color = 'green'      # Excelent
-        elif -85 < sig <= -70: color = 'gold'  # Bun
-        elif -100 < sig <= -85: color = 'orange' # Slab
-        else: color = 'red'               # Dead Zone
+        # Choosing color
+        if sig > -70: color = 'green'
+        elif -85 < sig <= -70: color = 'gold'
+        elif -100 < sig <= -85: color = 'orange'
+        else: color = 'red'
         
-        plt.scatter(u.x, u.y, c=color, s=40, edgecolors='black', zorder=5)
-
+        # Line from user to antenna
+        plt.plot([u.x, best_ant.x], [u.y, best_ant.y], 
+                 color=color, linestyle='--', linewidth=0.5, alpha=0.3, zorder=1)
+        
+        # Draw the point
+        plt.scatter(u.x, u.y, c=color, s=50, edgecolors='black', zorder=5)
+        
+        # Place text
+        plt.text(u.x + 40, u.y + 40, f"{u.name} ({sig:.0f}dBm)", 
+                 fontsize=8, alpha=0.9)
+        
     # Drawing antennas
     for ant in antennas:
         plt.scatter(ant.x, ant.y, marker='^', c='blue', s=150, 
@@ -157,8 +168,8 @@ def visualize_city(users, antennas, obstacles):
     plt.show()
 
 # --- DATA GENERATION ---
-first_names = ["Maria", "Andrei", "Elena", "Matei", "Ioana", "Stefan", "Anca", "Alex", "Cristian", "Laura"]
-last_names = ["Popescu", "Ionescu", "Dumitru", "Stan", "Gheorghe", "Stoica", "Radu", "Enache"]
+first_names = ["James", "Gabrielle","Sophia", "Michael","Penelope","Susan", "Mike","Paul","Louie", "Mary", "Jane", "Stefan", "Anne", "Benjamin", "Christian", "Katherine"]
+last_names = ["Mayer", "Williams", "Garcia", "Parker", "Young", "Solis", "Scavo", "Smith","Davis"]
 
 users_list = []
 used_coordinates = set()
@@ -198,8 +209,8 @@ while True:
         print(f"Added {obs_name} ({obs_type}) to the map.")
     except ValueError:
         print("Invalid input! Use numbers.")
-# --- ANTENNA CONFIGURATION (VERSION B with Min/Max) ---
-antennas_list = [Antenna("Macro_Default", 1500, 1500, 45)]
+# --- ANTENNA CONFIGURATION 0 ---
+antennas_list = []
 
 print("\n--- ANTENNA NETWORK CONFIGURATION ---")
 while True:

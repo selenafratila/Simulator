@@ -49,13 +49,24 @@ class User:
 
     def calculate_distance_to_antenna(self, antenna: Antenna):
         return np.sqrt((self.x - antenna.x)**2 + (self.y - antenna.y)**2)
-
+    def is_obstacle_blocking(self, antenna: Antenna, obs: Obstacle):
+        x1, y1 = antenna.x, antenna.y
+        x2, y2 = self.x, self.y
+        # 25%, 50%, 75% 
+        for ratio in [0.25, 0.5, 0.75]:
+            check_x = x1 + ratio * (x2 - x1)
+            check_y = y1 + ratio * (y2 - y1)
+            if obs.is_inside(check_x, check_y):
+                return True
+        return False
     def get_signal_from_antenna(self, antenna: Antenna, obstacles_list: list):
         dist = self.calculate_distance_to_antenna(antenna)
         total_obstacle_loss = 0
         for obs in obstacles_list:
             if obs.is_inside(self.x, self.y):
                 total_obstacle_loss += obs.loss_db
+            elif self.is_obstacle_blocking(antenna, obs):
+                total_obstacle_loss += (obs.loss_db * 0.5)
         return antenna.calculate_signal(dist, obstacle_loss=total_obstacle_loss)
 
     def find_best_antenna(self, antennas_list: list, obstacles_list: list):

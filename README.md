@@ -16,6 +16,8 @@ This project simulates how different types of cellular antennas (Pico, Micro, Ma
   - Connection lines between users and their best serving antenna.
  
 ## Simulation Scenarios
+
+
 - **The Industrial Shadow:** A high-power MacroCell blocked by a massive metal structure.
 
 What to observe:
@@ -32,6 +34,8 @@ Material Physics: Metal correctly triggers the highest attenuation, creating a v
 
 <img width="870" height="870" alt="download1" src="https://github.com/user-attachments/assets/a876fbb7-eed1-4c48-85f2-85f4fe377fe1" />
 
+
+
 - **The Urban Jungle:** Mixed obstacles (Forest & Concrete) demonstrating how small cells solve local coverage gaps.
 
 What to observe:
@@ -47,6 +51,8 @@ Network Hybridity: Demonstrates a realistic hybrid network where a Macro antenna
 <img width="870" height="450" alt="Screen Shot 2026-04-13 at 04 15 24" src="https://github.com/user-attachments/assets/bd0052b8-2d8b-454a-be16-d1bcc3118746" />
 
 <img width="870" height="870" alt="download2" src="https://github.com/user-attachments/assets/5b808601-71cf-4b7a-856f-5bbc0ebcc924" />
+
+
 
 - **The Glass District:** A mix of glass towers and a massive concrete barrier.
 
